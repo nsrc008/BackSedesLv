@@ -81,6 +81,14 @@ Levanta el servidor de desarrollo de Laravel:
 php artisan serve
 ```
 
+## Pruebas unitarias
+
+Para ejecutar las pruebas unitarias y probae el endpoint ejecute:
+
+```
+php artisan test
+```
+
 La aplicación estará disponible en http://localhost:8000.
 
 ## Autenticación
