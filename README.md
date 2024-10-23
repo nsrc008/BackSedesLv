@@ -49,13 +49,23 @@ Luego, configura las variables de entorno necesarias, incluyendo la API Key que 
 
 ### 4. Generar la clave de la aplicación
 
-Genera la clave de la aplicación de Laravel:
+Genera las claves de la aplicación de Laravel:
 
 ```
 php artisan key:generate
 ```
 
-### 5. Ejecutar migraciones (opcional)
+### 5. Generar la clave de la api API_KEY
+
+Genera las claves de la api de Laravel:
+
+```
+php artisan make:command GenerateApiKey
+```
+
+Esto imprimira un hash que deberas copiar y pegar en el archivo ```.env``` con el valor de ```API_KEY=tu_api_key```
+
+### 6. Ejecutar migraciones (opcional)
 
 Si en el futuro decides almacenar las sedes en una base de datos, puedes ejecutar las migraciones:
 
@@ -63,7 +73,7 @@ Si en el futuro decides almacenar las sedes en una base de datos, puedes ejecuta
 php artisan migrate
 ```
 
-### 6. Ejecutar la aplicación
+### 7. Ejecutar la aplicación
 
 Levanta el servidor de desarrollo de Laravel:
 
