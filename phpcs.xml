@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="LaravelProject">
+    <description>Custom coding standard for Laravel project</description>
+
+    <!-- Utilizar el estándar PSR12 -->
+    <rule ref="PSR12"/>
+</ruleset>
