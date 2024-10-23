@@ -25,7 +25,7 @@ Asegúrate de tener instalados los siguientes programas:
 Clona este repositorio en tu máquina local:
 
 ```
-[git clone https://github.com/nsrc008/FrontSedesLv.git](https://github.com/nsrc008/BackSedesLv.git)
+git clone https://github.com/nsrc008/BackSedesLv.git
 cd BackSedesLv
 ```
 
