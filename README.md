@@ -89,8 +89,6 @@ Para ejecutar las pruebas unitarias y probae el endpoint ejecute:
 php artisan test
 ```
 
-La aplicación estará disponible en http://localhost:8000.
-
 ## Autenticación
 
 Esta API utiliza una API Key para autenticar las solicitudes. La API Key debe ser proporcionada en el encabezado de cada solicitud como Authorization.
