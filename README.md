@@ -1,66 +1,272 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API de Sedes - Proyecto Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto consiste en una API RESTful desarrollada en Laravel que permite la gestión de información sobre sedes. La API ofrece un endpoint para obtener una lista de sedes (locations), y la autenticación se realiza mediante una API Key para garantizar la seguridad.
 
-## About Laravel
+## Características
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   Autenticación: Uso de API Key para proteger los endpoints.
+-   Operaciones CRUD: Actualmente, el único endpoint implementado es para obtener una lista de sedes.
+-   Datos simulados: Los datos de las sedes se cargan desde un archivo JSON o un array simulado en el controlador.
+-   Calidad del código: Configuración opcional de herramientas de análisis estático como PHPStan, PHP CodeSniffer, y Laravel Pint.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requisitos Previos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Asegúrate de tener instalados los siguientes programas:
 
-## Learning Laravel
+-   PHP >= 8.2
+-   Composer
+-   Laravel
+-   Docker (opcional)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Instalación
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. Clonar el repositorio
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Clona este repositorio en tu máquina local:
 
-## Laravel Sponsors
+```
+git clone https://github.com/nsrc008/FrontSedesLv.git
+cd BackLocationsAPI
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Instalar dependencias
 
-### Premium Partners
+Instala las dependencias del proyecto con Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+composer install
+```
 
-## Contributing
+### 3. Crear y configurar el archivo `.env`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Copia el archivo `.env.example` a `.env`:
 
-## Code of Conduct
+```
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Luego, configura las variables de entorno necesarias, incluyendo la API Key que será utilizada para la autenticación.
 
-## Security Vulnerabilities
+### 4. Generar la clave de la aplicación
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Genera la clave de la aplicación de Laravel:
 
-## License
+```
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Ejecutar migraciones (opcional)
+
+Si en el futuro decides almacenar las sedes en una base de datos, puedes ejecutar las migraciones:
+
+```
+php artisan migrate
+```
+
+### 6. Ejecutar la aplicación
+
+Levanta el servidor de desarrollo de Laravel:
+
+```
+php artisan serve
+```
+
+La aplicación estará disponible en http://localhost:8000.
+
+## Autenticación
+
+Esta API utiliza una API Key para autenticar las solicitudes. La API Key debe ser proporcionada en el encabezado de cada solicitud como Authorization.
+
+### Ejemplo:
+
+```
+Authorization: Bearer <tu-api-key>
+```
+
+## Uso de la API
+
+### Obtener la lista de sedes
+
+-   URL: /api/locations
+-   Método HTTP: `GET`
+-   Autenticación: API Key
+
+Este endpoint devuelve una lista de sedes con la siguiente información:
+
+-   `code`: Código único de la sede (ID).
+-   `name`: Nombre de la sede.
+-   `image`: URL simulada de una imagen de la sede.
+-   `creationDate`: Fecha de creación de la sede.
+
+### Ejemplo de respuesta:
+
+```
+[
+  {
+    "code": 1,
+    "name": "Sede Central",
+    "image": "https://example.com/image1.jpg",
+    "creationDate": "2024-01-15"
+  },
+  {
+    "code": 2,
+    "name": "Sede Norte",
+    "image": "https://example.com/image2.jpg",
+    "creationDate": "2024-02-20"
+  }
+]
+```
+
+## Configuración de la API Key
+
+Para la autenticación, se utiliza una API Key que puedes definir en el archivo `.env`:
+
+```
+API_KEY=your-api-key-here
+```
+
+## Middleware para la autenticación con API Key
+
+En el proyecto, se incluye un middleware para validar la API Key antes de procesar las solicitudes. Si la API Key es incorrecta o no se proporciona, el sistema devuelve una respuesta de error 401 (Unauthorized).
+
+## Consideraciones Técnicas
+
+-   Rutas: Las rutas se encuentran en el archivo routes/api.php.
+-   Controladores: El controlador principal es LocationController, que gestiona las solicitudes al endpoint /api/locations.
+-   Errores: En caso de que la API Key no sea válida, se devuelve una respuesta JSON con el estado 401.
+
+## Herramientas de Calidad de Código
+
+Se incluyen las siguientes herramientas para garantizar la calidad del código:
+
+-   PHP CodeSniffer y Laravel Pint: Para asegurarse de que el código cumple con los estándares.
+-   PHPStan: Para análisis estático del código.
+
+### Ejecución de las herramientas:
+
+-   PHP CodeSniffer:
+
+```
+vendor/bin/phpcs
+```
+
+-   Laravel Pint:
+
+```
+vendor/bin/pint
+```
+
+-   PHPStan:
+
+```
+vendor/bin/phpstan analyse
+```
+
+## Despliegue en Producción
+
+Para desplegar la API en un entorno de producción, sigue estos pasos:
+
+1. Asegúrate de que la variable APP_ENV=production esté configurada en el archivo .env.
+2. Configura correctamente los valores de API_KEY, ALLOWED_HOSTS, y APP_DEBUG=false.
+3. Considera utilizar un servidor web como Nginx o Apache para manejar las solicitudes.
+
+## Dependencias
+
+El proyecto utiliza las siguientes dependencias, listadas en composer.json:
+
+```
+{
+  "require": {
+    "php": "^8.2",
+    "laravel/framework": "^11.9",
+    "laravel/sanctum": "^4.0",
+    "laravel/tinker": "^2.9"
+  }
+}
+```
+
+Las dependencias de desarrollo se manejan a través de composer.json y package.json:
+
+```
+{
+  "devDependencies": {
+    "vite": "^5.0",
+    "tailwindcss": "^3.4.13",
+    "laravel-vite-plugin": "^1.0"
+  }
+}
+```
+
+## Docker Compose
+
+## Estructura del Proyecto
+
+A continuación, se muestra la estructura de directorios del proyecto:
+
+```
+/proyecto
+│
+├── FrontSedesLv/            # Repositorio del frontend
+│   ├── Dockerfile
+│   └── ... (otros archivos del frontend)
+│
+├── BackSedesDj/             # Repositorio del backend
+│   ├── Dockerfile
+│   └── ... (otros archivos del backend)
+│
+└── docker-compose.yml          # Archivo para orquestar los servicios
+```
+
+## Instrucciones de Uso
+
+1. Clonar los Repositorios: Clona ambos repositorios (frontend y backend) en el mismo directorio donde se encuentra el archivo `docker-compose.yml`.
+2. Construir y Ejecutar los Servicios:
+    - Abre una terminal y navega hasta el directorio que contiene `docker-compose.yml`.
+    - Ejecuta el siguiente comando para construir y levantar los contenedores:
+        ```
+         docker-compose up --build
+        ```
+3. Acceso a la Aplicación:
+    - El frontend estará disponible en `http://localhost:3000 `
+    - El backend estará disponible en `http://localhost:8000`
+
+## Descripción del Archivo docker-compose.yml
+
+```
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./FrontProjectRc
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./BackProjectLv
+    ports:
+      - "8000:80"
+    networks:
+      - app-network
+    volumes:
+      - backend_data:/var/www/html
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:YpsxTw/mKmMOXTRpPpY3u/LceoxJWauq2gYGMkopUQo=
+      - API_KEY=f3f24338ac0ede6a37e47d6012b4c389
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  backend_data:
+```
+
+Este archivo orquesta tanto el frontend como el backend, asegurando que ambos servicios estén disponibles y funcionando correctamente.
